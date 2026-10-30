@@ -1,0 +1,109 @@
+\documentclass{standalone}
+
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\usepackage{comment}
+
+\usetikzlibrary{pgfplots.colormaps}
+
+\pgfplotsset{compat=newest}
+\pgfplotsset{
+	legend style={
+		font=\scriptsize, % Adjust font size
+		nodes={scale=1.125, transform shape} % Scale down the legend
+	}
+}
+
+\definecolor{IBM1}{HTML}{648fff}
+\definecolor{IBM2}{HTML}{785ef0}
+\definecolor{IBM3}{HTML}{dc267f}
+\definecolor{IBM4}{HTML}{fe6100}
+\definecolor{IBM5}{HTML}{ffb000}
+\definecolor{IBM6}{RGB}{051,117,056}
+
+\definecolor{PTB1}{RGB}{046,037,133}
+\definecolor{PTB2}{RGB}{051,117,056}
+\definecolor{PTB3}{RGB}{093,168,153}
+\definecolor{PTB4}{RGB}{148,203,236}
+\definecolor{PTB5}{RGB}{220,205,125}
+\definecolor{PTB6}{RGB}{194,106,119}
+
+\definecolor{Okabe1}{RGB}{000,158,115}
+\definecolor{Okabe2}{RGB}{000,114,178}
+\definecolor{Okabe3}{RGB}{086,180,233}
+\definecolor{Okabe4}{RGB}{230,159,000}
+\definecolor{Okabe5}{RGB}{213,094,000}
+\definecolor{Okabe6}{RGB}{204,121,167}
+
+\definecolor{b1}{HTML}{d73027}
+\definecolor{b2}{HTML}{fc8d59}
+\definecolor{b3}{HTML}{fee090}
+\definecolor{b4}{HTML}{e0f3f8}
+\definecolor{b5}{HTML}{91bfdb}
+\definecolor{b6}{HTML}{4575b4}
+
+\begin{document}
+	\vspace{1cm}
+		\begin{tikzpicture}
+		\begin{axis}[
+			enlargelimits=false,
+			xmode=log,
+			ymode=log,
+			tick pos=left, %
+			tick align=outside, %
+			axis line style={opacity=0}, %
+			title={$e.$},
+			title style={yshift=-2ex, xshift=-32ex},
+			after end axis/.code={
+				\draw ({rel axis cs:0,0}
+				-|{axis cs:0.001,0}) % xmin (line starts here)
+				-- ({rel axis cs:0,0}
+				-|{axis cs:0.1,0}); % xmax (line stops here)
+				\draw ({rel axis cs:0,0}
+				|-{axis cs:0,0.1}) % ymin (line starts here)
+				-- ({rel axis cs:0,0}
+				|-{axis cs:0,100}); % ymax (line stops here)
+			},
+			xlabel={$\frac{8}{\lambda^2}$$\bar{\Delta}$},
+			ylabel={$\bar{F}_{eg}$},
+			xmin=0.001, xmax=0.1,
+			ymin=0.1, ymax=100,
+			]
+			
+			\addplot[dashed, color=gray, mark=none, domain=0.0001:0.1] {380.71*x^0.9244};
+			
+			\addplot[mark=pentagon*, only marks, mark size=4pt, mark options={Okabe6, fill=Okabe6!80}, opacity=0.4]  table[skip first n = 3, x index = 48, y index = 54, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=pentagon*, only marks, mark size=4pt, mark options={Okabe6, fill=Okabe6!80}, opacity=0.4]  table[skip first n = 3, x index = 49, y index = 55, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=pentagon*, only marks, mark size=4pt, mark options={Okabe6, fill=Okabe6!80}, opacity=0.4]  table[skip first n = 3, x index = 50, y index = 56, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=pentagon*, only marks, mark size=4pt, mark options={Okabe6, fill=Okabe6!80}, opacity=0.4]  table[skip first n = 3, x index = 51, y index = 58, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=pentagon*, only marks, mark size=4pt, mark options={Okabe6, fill=Okabe6!80}, opacity=0.4]  table[skip first n = 3, x index = 52, y index = 58, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=pentagon*, only marks, mark size=4pt, mark options={Okabe6, fill=Okabe6!80}, opacity=0.4]  table[skip first n = 3, x index = 53, y index = 59, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			
+			\addplot[mark=triangle*, only marks, mark size=4pt, mark options={Okabe2, fill=Okabe2!80}, opacity=0.4]  table[skip first n = 3, x index = 0, y index = 6, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=triangle*, only marks, mark size=4pt, mark options={Okabe2, fill=Okabe2!80}, opacity=0.4]  table[skip first n = 3, x index = 1, y index = 7, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=triangle*, only marks, mark size=4pt, mark options={Okabe2, fill=Okabe2!80}, opacity=0.4]  table[skip first n = 3, x index = 2, y index = 8, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=triangle*, only marks, mark size=4pt, mark options={Okabe2, fill=Okabe2!80}, opacity=0.4]  table[skip first n = 3, x index = 3, y index = 9, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=triangle*, only marks, mark size=4pt, mark options={Okabe2, fill=Okabe2!80}, opacity=0.4]  table[skip first n = 3, x index = 4, y index = 10, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=triangle*, only marks, mark size=4pt, mark options={Okabe2, fill=Okabe2!80}, opacity=0.4]  table[skip first n = 3, x index = 5, y index = 11, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			
+			\addplot[mark=square*, only marks, mark size=3pt, mark options={Okabe4, fill=Okabe4!80}, opacity=0.4]  table[skip first n = 3, x index = 24, y index = 30, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=square*, only marks, mark size=3pt, mark options={Okabe4, fill=Okabe4!80}, opacity=0.4]  table[skip first n = 3, x index = 25, y index = 31, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=square*, only marks, mark size=3pt, mark options={Okabe4, fill=Okabe4!80}, opacity=0.4]  table[skip first n = 3, x index = 26, y index = 32, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=square*, only marks, mark size=3pt, mark options={Okabe4, fill=Okabe4!80}, opacity=0.4]  table[skip first n = 3, x index = 27, y index = 33, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=square*, only marks, mark size=3pt, mark options={Okabe4, fill=Okabe4!80}, opacity=0.4]  table[skip first n = 3, x index = 28, y index = 34, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=square*, only marks, mark size=3pt, mark options={Okabe4, fill=Okabe4!80}, opacity=0.4]  table[skip first n = 3, x index = 29, y index = 35, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			
+			\addplot[mark=*, only marks, mark size=3pt, mark options={Okabe1, fill=Okabe1!80}, opacity=0.4]  table[skip first n = 3, x index = 36, y index = 42, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=*, only marks, mark size=3pt, mark options={Okabe1, fill=Okabe1!80}, opacity=0.4]  table[skip first n = 3, x index = 37, y index = 43, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=*, only marks, mark size=3pt, mark options={Okabe1, fill=Okabe1!80}, opacity=0.4]  table[skip first n = 3, x index = 38, y index = 44, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=*, only marks, mark size=3pt, mark options={Okabe1, fill=Okabe1!80}, opacity=0.4]  table[skip first n = 3, x index = 39, y index = 45, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=*, only marks, mark size=3pt, mark options={Okabe1, fill=Okabe1!80}, opacity=0.4]  table[skip first n = 3, x index = 40, y index = 46, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+			\addplot[mark=*, only marks, mark size=3pt, mark options={Okabe1, fill=Okabe1!80}, opacity=0.4]  table[skip first n = 3, x index = 41, y index = 47, col sep=comma]{5-25KPa_NonDim_Data_8-19.csv};
+		\end{axis}
+		
+	\end{tikzpicture}
+
+	
+\end{document}

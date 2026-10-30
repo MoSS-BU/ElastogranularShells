@@ -1,0 +1,235 @@
+\documentclass{standalone}
+
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{comment}
+\pgfplotsset{compat=newest}
+
+\definecolor{blue2}{rgb}{0.62, 0.792, 0.882}
+\definecolor{red2}{rgb}{0.888, 0.18, 0.152}
+\definecolor{red3}{rgb}{0.988, 0.572, 0.447}
+\definecolor{red4}{rgb}{0.996, 0.878, 0.823}
+\definecolor{red5}{rgb}{0.6,0,0.05}
+
+
+\definecolor{myblue1}{RGB}{251,46,1}
+\definecolor{myblue2}{RGB}{253,171,153}
+\definecolor{myorange1}{RGB}{111,203,159}
+\definecolor{myorange2}{RGB}{183,229,207}
+
+\definecolor{Okabe1}{RGB}{000,158,115}
+\definecolor{Okabe2}{RGB}{000,114,178}
+\definecolor{Okabe3}{RGB}{086,180,233}
+\definecolor{Okabe4}{RGB}{230,159,000}
+\definecolor{Okabe5}{RGB}{213,094,000}
+\definecolor{Okabe6}{RGB}{204,121,167}
+
+\pgfplotsset{compat=newest}
+
+
+\begin{document}
+	\pgfplotsset{
+		range frame dc/.style={
+			tick pos=left,
+			tick align=outside,
+			axis line style={opacity=0},
+			after end axis/.code={
+				\draw ({rel axis cs:0,0}
+				-|{axis cs:0.1,0})
+				-- ({rel axis cs:0,0}
+				-|{axis cs:1000,0});
+				\draw ({rel axis cs:0,0}
+				|-{axis cs:0,0.01})
+				-- ({rel axis cs:0,0}
+				|-{axis cs:0,1});
+			}
+		}
+	}
+	\pgfplotsset{
+		range frame B/.style={
+			tick pos=left,
+			tick align=outside,
+			axis line style={opacity=0},
+			after end axis/.code={
+				\draw ({rel axis cs:0,0}
+				-|{axis cs:0.01,0})
+				-- ({rel axis cs:0,0}
+				-|{axis cs:1,0});
+				\draw ({rel axis cs:0,0}
+				|-{axis cs:0,0.01})
+				-- ({rel axis cs:0,0}
+				|-{axis cs:0,1});
+			}
+		}
+	}
+	\pgfplotsset{
+		range frame C/.style={
+			tick pos=left,
+			tick align=outside,
+			axis line style={opacity=0},
+			after end axis/.code={
+				\draw ({rel axis cs:0,0}
+				-|{axis cs:0.001,0})
+				-- ({rel axis cs:0,0}
+				-|{axis cs:0.1,0});
+				\draw ({rel axis cs:0,0}
+				|-{axis cs:0,0.01})
+				-- ({rel axis cs:0,0}
+				|-{axis cs:0,1});
+			}
+		}
+	}
+	\pgfplotsset{
+		range frame D/.style={
+			tick pos=left,
+			tick align=outside,
+			axis line style={opacity=0},
+			after end axis/.code={
+				\draw ({rel axis cs:0,0}
+				-|{axis cs:0.01,0})
+				-- ({rel axis cs:0,0}
+				-|{axis cs:1,0});
+				\draw ({rel axis cs:0,0}
+				|-{axis cs:0,0.001})
+				-- ({rel axis cs:0,0}
+				|-{axis cs:0,1});
+			}
+		}
+	}
+	
+\begin{tikzpicture}
+ % \node (img2) at (0.93\linewidth,+1.5)  {\includegraphics[width=0.64\linewidth]{psi6-222.jpg}};
+ % \node (labelA) at (0.4\linewidth, -11.7) {$e.$};
+ % \node (labelF) at (0.59\linewidth, +1.5) {$f.$};  
+\begin{axis}[
+		declare function = {f(\x)=0.3447*((\x)^(-0.4574));},
+		name=plot11,
+		%at=(fig1.below south west), anchor=above north west,
+		baseline,
+		range frame dc,
+		title={$a.$},
+		title style={yshift=-2ex, xshift=-28ex},
+		%y label style={xshift=0.1cm, yshift=0cm},
+		xmode=log,
+		ymode=log,
+		%domain=-1:3, samples=100,
+		xmin=0.1, 	xmax=1000,
+		ymin=0.01,	ymax=1,
+		xlabel=$E/p_i$,
+		ylabel=$\frac{F}{REh_i}$,
+		x post scale=0.8,
+		y post scale=0.5,
+		]
+        
+
+        
+        \addplot[mark=*, only marks, mark size=3pt, mark options={Okabe1, fill=Okabe1!80}, opacity=0.4]  
+        table[x index=0,y index=1, col sep=comma]{PIFits.csv}; 
+             
+        
+        \addplot[dashed, color=gray, log basis x=10, domain=0.0005:1000]  {f(x)};
+        
+        %mark slope
+        \addplot[mark=none, thick,black] coordinates {(0.6,0.348) (6,0.122) (0.6,0.122) (0.6,0.348) (6,0.122)};
+        
+        % Annotate slope
+        \node at (axis cs:0.24,0.19) [black]{$-$0.46};
+         
+           
+\end{axis}
+\begin{axis}[	 
+		declare function = {f(\x)=0.5605*((\x)^(0.7801));},
+		name=plot1, at=(plot11.right of south east), anchor=left of south west,
+			range frame B,
+			baseline,
+			title={$b.$},
+			title style={yshift=-2ex, xshift=-28ex},
+		xmode=log,
+		ymode=log,
+			xmin=0.01, 	xmax=1,
+			ymin=0.01,	ymax=1,
+		xlabel=$\frac{h_o}{h_i}\left(\frac{E}{p_i}\right)^{-0.46}$,
+		ylabel=$\frac{F}{REh_i}$,
+		x post scale=0.8,
+		y post scale=0.5,
+	]
+
+       \addplot[mark=square*, only marks, mark size=3pt, mark options={Okabe4, fill=Okabe4!80}, opacity=0.4]  
+       table[x index=2,y index=3, col sep=comma]{PIFits.csv}; 
+       
+       \addplot[dashed, color=gray, log basis x=10, domain=0.0005:1000]  {f(x)};
+       
+       \addplot[mark=none, thick,black] coordinates {(0.15,0.102) (0.5,0.261) (0.5,0.102) (0.15,0.102) (0.5,0.261)};
+       
+       % Annotate slope
+       \node at (axis cs:0.7,0.17) [black]{0.78};
+       
+\end{axis}
+\begin{axis}[
+	yshift=-0.445cm,
+	declare function = {f(\x)=3.631*((\x)^(0.795));},
+	name=plot33,
+	at=(plot11.below south west), anchor=above north west,
+	baseline,
+	range frame C,
+	title={$c.$},
+	title style={yshift=-2ex, xshift=-28ex},
+	xmode=log,
+	ymode=log,	
+	xmin=0.001, 	xmax=0.1,
+	ymin=0.01,	ymax=1,
+	xlabel=$\frac{r_g}{R}\left(\frac{E}{p_i}\right)^{-0.46}$,
+	ylabel=$\frac{F}{REh_i}$,
+	x post scale=0.8,
+	y post scale=0.5,
+]
+
+  \addplot[mark=pentagon*, only marks, mark size=4pt, mark options={Okabe6, fill=Okabe6!80}, opacity=0.4]  
+  table[x index=4,y index=5, col sep=comma]{PIFits.csv};
+  
+  \addplot[dashed, color=gray, log basis x=10, domain=0.0005:1]  {f(x)};
+  
+  \addplot[mark=none, thick,black] coordinates {(0.015,0.103) (0.05,0.268) (0.05,0.103) (0.015,0.103) (0.05,0.268)};
+  
+  % Annotate slope
+  \node at (axis cs:0.07,0.16) [black]{0.80};
+  
+\end{axis}
+\begin{axis}[%enlarge y limits=true,clip=false, 
+	declare function = {f(\x)=0.1121*((\x)^(0.8488));},
+	skip coords between index={111}{121},
+	name=plot333,
+	at=(plot1.below south west), anchor=above north west,
+	baseline,
+	range frame D,
+	title={$d.$},
+	title style={yshift=-2ex, xshift=-28ex},
+	xmode=log,
+	ymode=log,
+	xmin=0.01, 	xmax=1,
+	ymin=0.001,	ymax=1,
+	xlabel=$\frac{\phi_0}{\phi_f}\left(\frac{E}{p_i}\right)^{-0.46}$,
+	ylabel=$\frac{F}{REh_i}$,
+	x post scale=0.8,
+	y post scale=0.5,
+	]
+ 
+	table[x index=8,y index=9, col sep=comma]{PIFits.csv};
+	
+	\addplot[mark=triangle*, only marks, mark size=4pt, mark options={Okabe2, fill=Okabe2!80}, opacity=0.4]  
+	table[x index=6,y index=7, col sep=comma]{PIFits.csv};
+	
+	
+	\addplot[dashed, color=gray, log basis x=10, domain=0.0005:1]  {f(x)};
+	
+	\addplot[mark=none, thick,black] coordinates {(0.015,0.00232386) (0.06,0.0075377) (0.06,0.00232386) (0.015,0.00232386) (0.06,0.0075377)};
+	
+	% Annotate slope
+	\node at (axis cs:0.085,0.004) [black]{0.85};
+
+\end{axis}
+
+
+\end{tikzpicture}
+\end{document}				
