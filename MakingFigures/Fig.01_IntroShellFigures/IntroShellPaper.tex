@@ -1,0 +1,64 @@
+\documentclass[tikz]{standalone}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{comment}
+\usepackage{tikz}
+\usepackage{textcomp}
+
+\begin{document}
+	\begin{comment}
+		\begin{tabular}{@{}c@{}c@{}}
+			\includegraphics[width=0.5\textwidth]{shellAmbient.jpg} &
+			\includegraphics[width=0.5\textwidth]{shellCrushed.jpg} \\
+			\noalign{\vskip -4pt}
+			\includegraphics[width=0.5\textwidth]{shellNeg.jpg} &
+			\includegraphics[width=0.5\textwidth]{shellHold.jpg}
+		\end{tabular}.
+	\end{comment}
+	\begin{tikzpicture}
+		%\node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[trim = 0 4 0 0, clip, width=\textwidth]{All4Shells.pdf}};
+		
+		\node[anchor=south west,inner sep=0] at (0.1,2.74) {\includegraphics[trim = 0 0 0 0, clip, width=3.8 cm]{shellCutOut_crop}};
+		\node[anchor=south west,inner sep=0] at (4,2.64) {\includegraphics[trim = 0 0 0 0, clip, width=4 cm]{0.74_1}};
+		
+		\node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[trim = 50 75 50 0, clip, width=4 cm]{newShellAmb}};
+		\node[anchor=south west,inner sep=0] at (4,0) {\includegraphics[trim = 50 75 50 0, clip, width=4 cm]{newShellNeg}};
+		
+		
+		% 2.5 cm is 60 mm
+		%\draw [white,ultra thick] (1.5,5.25) -- (4.5, 5.25);
+		%\node [anchor=center] at (5, 7.5) {\color{white}{{{20 mm}}}};
+		
+		\draw [white,ultra thick] (0.1,0.125) -- (1.35,0.125);
+		
+		% 2.3 cm is 65 mm
+		% 1.062 cm is 30 mm
+		
+		
+		\draw [white,ultra thick] (4.1,2.8) -- (5.162,2.8);
+		
+		
+		\node [anchor=south west] at (0.1,4.85) {\color{black}{$a.$}};
+		\node [anchor=south west] at (4.1,4.85) {\color{white}{$b.$}};
+		\node [anchor=south west] at (0.1,2.15) {\color{white}{$c.$}};
+		\node [anchor=south west] at (4.1,2.15) {\color{white}{$d.$}};
+		
+		
+		\node [anchor=south west] at (5,2.05) {\color{white}{{{$p_i=25$ kPa}}}};
+		\node [anchor=south west] at (1,2.05) {\color{white}{{{$p_i=0$ kPa}}}};
+		
+		
+		
+		
+		
+		%\node[anchor=west] (source) at (1.25,1.125){};
+		%\node[anchor=west] (destination) at (0,1.125){};
+		%\draw[->,white,ultra thick](source)--(destination);
+		
+		
+		%\node [anchor=center] at (0.8,1.45) {\color{white}{{{air out}}}};
+	\end{tikzpicture}
+	
+	
+\end{document}
